@@ -1,0 +1,25 @@
+.bookings {
+    margin: 2rem 5rem;
+    font-size: 1.2rem;
+}
+
+.details {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+    .detail--column {
+        
+    }
+
+    .list{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .detail__venues, .detail__bands {
+        flex-basis: 24%;
+        margin: 0 2rem;
+        border: 1px dotted goldenrod;
+        padding: 20px;
+    }
