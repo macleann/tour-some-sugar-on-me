@@ -16,6 +16,7 @@ document.addEventListener("click", (clickEvent) => {
 
     if (itemClicked.id.startsWith("venue")) {
 
+        //finding the clicked venue, setting it to matchingVenue
         const [,clickedVenueId] = itemClicked.id.split("--")
         let matchingVenue = null
         for (const venue of venues) {
@@ -24,6 +25,7 @@ document.addEventListener("click", (clickEvent) => {
             }
         }
 
+        //finding all bookings at matchingVenue, pushing each booking's bandId to matchingBooking
         const matchingBookings = []
         for (const booking of bookings) {
             if (booking.venueId === matchingVenue.id) {
@@ -31,42 +33,47 @@ document.addEventListener("click", (clickEvent) => {
             }
         }
 
+        //lines 37-76 are finding all bands of matchingBookings, pushing each band's name to matchingBands if there is more than one, and then printing them
         const matchingBands = []
-        const makeWindowAlert = () => {
-            let windowAlert = ''
-            if (matchingBookings.length > 1) {
-                for (const band of bands) {
-                    for (let i = 0; i < matchingBookings.length; i++) {
-                        if (matchingBookings[i] === band.id) {
-                            matchingBands.push(band.name)
-                        }
-                    }
-                }
-                windowAlert = makeBandsString() + ' are playing this venue'
-            } else {
-                for (const band of bands) {
-                    if (matchingBookings[0] === band.id) {
-                        windowAlert = `${band.name} is playing this venue`
+        let windowAlert = ''
+
+        //if statement for grammar syntax. lines 41-48  are pushing each band's name to matchingBands
+        if (matchingBookings.length > 1) {
+            for (const band of bands) {
+                for (const booking of matchingBookings) {
+                    if (booking === band.id) {
+                        matchingBands.push(band.name)
                     }
                 }
             }
-            return windowAlert
-        }
-        function makeBandsString() {
+
             let multipleBandsString = ''
+            
+            //more grammar syntax, if statement for exactly 2 bands playing at the clicked venue
             if (matchingBookings.length < 3) {
                 multipleBandsString = `${matchingBands[0]} and ${matchingBands[1]}`
+            //else statement for 3 or more bands playing at the clicked venue, re: oxford comma
             } else {
-                for (let j = 0; j < (matchingBands.length - 1); j++) {
-                    multipleBandsString += `${matchingBands[j]}, `
+                for (let i = 0; i < (matchingBands.length - 1); i++) {
+                    multipleBandsString += `${matchingBands[i]}, `
                 }
                 const lastBand = matchingBands.length - 1
                 multipleBandsString += `and ${matchingBands[lastBand]}`
             }
-            return multipleBandsString
+
+            //end of if statement for grammar syntax, see multiple bands "are" playing at the clicked venue
+            windowAlert = multipleBandsString + ` are playing at ${matchingVenue.name}`
+
+        //else statement for grammar syntax if only one band "is" playing at the clicked venue, note that matchingBands is not needed here
+        } else {
+            for (const band of bands) {
+                if (matchingBookings[0] === band.id) {
+                    windowAlert = `${band.name} is playing at ${matchingVenue.name}`
+                }
+            }
         }
 
-        window.alert(makeWindowAlert())
+        window.alert(windowAlert)
     }
 })
 

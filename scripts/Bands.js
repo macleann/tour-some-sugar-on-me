@@ -4,11 +4,12 @@ objective:
     also, to create responsive web design with event listeners
 */
 
-import { getBands, getBookings, getVenues } from "./database.js"
+import { getBands, getBookings, getVenues, getBandMembers } from "./database.js"
 
 const bands = getBands()
 const bookings = getBookings()
 const venues = getVenues()
+const bandMembers = getBandMembers()
 
 document.addEventListener("click", (clickEvent) => {
     
@@ -16,6 +17,7 @@ document.addEventListener("click", (clickEvent) => {
 
     if (itemClicked.id.startsWith("band")) {
         
+        //finding the band, setting to matchingBand
         const [,clickedBandId] = itemClicked.id.split("--")
         let matchingBand = null
         for (const band of bands) {
@@ -24,6 +26,7 @@ document.addEventListener("click", (clickEvent) => {
             }
         }
 
+        //finding all bookings that band is playing, pushing every venueId to matchingBookings
         const matchingBookings = []
         for (const booking of bookings) {
             if (matchingBand.id === booking.bandId) {
@@ -31,42 +34,43 @@ document.addEventListener("click", (clickEvent) => {
             }
         }
 
-        const matchingVenues = []
-        const makeWindowAlert = () => {
-            let windowAlert = ""
-            if (matchingBookings.length > 1) {
-                for (const venue of venues) {
-                    for (let i = 0; i < matchingBookings.length; i++) {
-                        if (matchingBookings[i] === venue.id) {
-                            matchingVenues.push(venue.name)
-                        }
-                    }
-                }
-                windowAlert = `${matchingBand.name} is playing at ` + makeVenuesString()
-            } else {
-                for (const venue of venues) {
-                    if (matchingBookings[0] === venue.id) {
-                        windowAlert = `${matchingBand.name} is playing at ${venue.name}`
-                    }
+        //finding all members of the matchingBand, pushing each to matchingMembers, and then making a string out of it
+        const makeBandMembersString = () => {
+            const matchingMembers = []
+            for (const bandMember of bandMembers) {
+                if (bandMember.bandId === matchingBand.id) {
+                    matchingMembers.push(bandMember)
                 }
             }
-            return windowAlert
-        }
-        function makeVenuesString() {
-            let multipleVenuesString = ""
-            if (matchingBookings.length < 3) {
-                multipleVenuesString = `${matchingVenues[0]} and ${matchingVenues[1]}`
-            } else {
-                for (let j = 0; j < (matchingVenues.length - 1); j++) {
-                    multipleVenuesString += `${matchingVenues[j]}, `
-                }
-                const lastVenue = matchingVenues.length - 1
-                multipleVenuesString += `and ${matchingVenues[lastVenue]}`
+    
+            let bandMembersString = ''
+            for (const bandMember of matchingMembers) {
+                bandMembersString += `${bandMember.firstName} ${bandMember.lastName} (${bandMember.instrument})\n`
             }
-            return multipleVenuesString
+            return bandMembersString
         }
 
-        window.alert(makeWindowAlert())
+        //finding all venues of matchingBookings, pushing each to matchingVenues, and then making a string out of it
+        const makeVenuesString = () => {
+            const matchingVenues = []
+            for (const venue of venues) {
+                for (const bookingVenueId of matchingBookings) {
+                    if (bookingVenueId === venue.id) {
+                        matchingVenues.push(venue.name)
+                    }
+                }
+            }
+
+            let venuesString = ""
+                for (const venue of matchingVenues) {
+                    venuesString += `${venue}\n`
+                }
+            return venuesString
+        }
+
+        let windowAlert = makeBandMembersString() + `\nUpcoming Shows:\n` + makeVenuesString()
+
+        window.alert(windowAlert)
     }
 })
 

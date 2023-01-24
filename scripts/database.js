@@ -126,7 +126,7 @@ const database = {
     },{
         id: 6,
         name: 'Sublime and Paris Hilton',
-        numOfMembers: 4,
+        numOfMembers: 3,
         genre: 'Ska/Pop',
         yearFormed: 2011
     },{
@@ -147,6 +147,189 @@ const database = {
         numOfMembers: 4,
         genre: 'Rock',
         yearFormed: 1983
+    }],
+    bandMembers: [{
+        id: 1,
+        firstName: 'Jimmy',
+        lastName: 'John',
+        yearBorn: 1980,
+        instrument: 'Drums',
+        bandId: 1
+    },{
+        id: 2,
+        firstName: 'James',
+        lastName: 'John',
+        yearBorn: 1982,
+        instrument: 'Bass',
+        bandId: 1
+    },{
+        id: 3,
+        firstName: 'Jim',
+        lastName: 'John',
+        yearBorn: 1981,
+        instrument: 'Lead Vocals/Guitar',
+        bandId: 1
+    },{
+        id: 4,
+        firstName: 'Death',
+        lastName: 'Eater',
+        yearBorn: 1989,
+        instrument: 'Lead Vocals/Bass/Noise',
+        bandId: 2
+    },{
+        id: 5,
+        firstName: 'Life',
+        lastName: 'Ender',
+        yearBorn: 1980,
+        instrument: 'Drums/Vocals',
+        bandId: 2
+    },{
+        id: 6,
+        firstName: 'Jerry',
+        lastName: 'Brewskies',
+        yearBorn: 1964,
+        instrument: 'Lead Guitar',
+        bandId: 3
+    },{
+        id: 7,
+        firstName: 'Dru',
+        lastName: 'Ferris',
+        yearBorn: 1964,
+        instrument: 'Lead Vocals/Guitar',
+        bandId: 3
+    },{
+        id: 8,
+        firstName: 'Tom',
+        lastName: 'Ferris',
+        yearBorn: 1966,
+        instrument: 'Bass',
+        bandId: 3
+    },{
+        id: 9,
+        firstName: 'Jin',
+        lastName: 'Ferris',
+        yearBorn: 1968,
+        instrument: 'Drums',
+        bandId: 3
+    },{
+        id: 10,
+        firstName: 'Josh',
+        lastName: 'Hanson',
+        yearBorn: 1988,
+        instrument: 'Vocals/Guitar',
+        bandId: 4
+    },{
+        id: 11,
+        firstName: 'Dan',
+        lastName: 'Lotapin',
+        yearBorn: 1982,
+        instrument: 'Lead Vocals/Computer',
+        bandId: 5
+    },{
+        id: 12,
+        firstName: 'Ulrich',
+        lastName: 'Williamson',
+        yearBorn: 1981,
+        instrument: 'Bass',
+        bandId: 6
+    },{
+        id: 13,
+        firstName: 'Buddy',
+        lastName: 'Guthrie',
+        yearBorn: 1982,
+        instrument: 'Drums/Tracks',
+        bandId: 6
+    },{
+        id: 14,
+        firstName: 'Paris',
+        lastName: 'Hilton',
+        yearBorn: 1987,
+        instrument: 'Lead Vocals',
+        bandId: 6
+    },{
+        id: 15,
+        firstName: 'Stewart',
+        lastName: 'Mackenzie',
+        yearBorn: 1987,
+        instrument: 'Lead Vocals/Guitar',
+        bandId: 7
+    },{
+        id: 16,
+        firstName: 'Kenny',
+        lastName: 'Smith',
+        yearBorn: 1987,
+        instrument: 'Vocals/Guitar/Harmonica',
+        bandId: 7
+    },{
+        id: 17,
+        firstName: 'Johnnie',
+        lastName: 'Runner',
+        yearBorn: 1987,
+        instrument: 'Lead Guitar',
+        bandId: 7
+    },{
+        id: 18,
+        firstName: 'Cake',
+        lastName: 'Greg',
+        yearBorn: 1987,
+        instrument: 'Bass',
+        bandId: 7
+    },{
+        id: 19,
+        firstName: 'Lake',
+        lastName: 'Ashwood',
+        yearBorn: 1987,
+        instrument: 'Synthesizer',
+        bandId: 7
+    },{
+        id: 20,
+        firstName: 'Bryce',
+        lastName: 'Cavalier',
+        yearBorn: 1987,
+        instrument: 'Drums',
+        bandId: 7
+    },{
+        id: 21,
+        firstName: 'Scrumbo',
+        lastName: 'Gumbo',
+        yearBorn: 1987,
+        instrument: 'Drums',
+        bandId: 7
+    },{
+        id: 22,
+        firstName: 'Dom',
+        lastName: 'Bates',
+        yearBorn: 1954,
+        instrument: 'Vocals/Guitar',
+        bandId: 8
+    },{
+        id: 23,
+        firstName: 'Tony',
+        lastName: 'Kidney',
+        yearBorn: 1969,
+        instrument: 'Lead Vocals',
+        bandId: 9
+    },{
+        id: 24,
+        firstName: 'Jack',
+        lastName: 'Freshanti',
+        yearBorn: 1974,
+        instrument: 'Guitar',
+        bandId: 9
+    },{
+        id: 25,
+        firstName: 'Skeeter',
+        lastName: 'Just Skeeter',
+        yearBorn: 1970,
+        instrument: 'Bass',
+        bandId: 9
+    },{
+        id: 26,
+        firstName: 'Will',
+        lastName: 'Ferrell',
+        yearBorn: 1968,
+        instrument: 'Lead Vocals',
+        bandId: 9
     }],
     bookings: [{
         id: 1,
@@ -261,4 +444,8 @@ export const getBands = () => {
 
 export const getBookings = () => {
     return database.bookings.map(booking => ({...booking}))
+}
+
+export const getBandMembers = () => {
+    return database.bandMembers.map(bandMember => ({...bandMember}))
 }

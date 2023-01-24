@@ -244,3 +244,9 @@ What's included:
                 import details.css stylesheet
                 import google font
                 style typography
+
+UPDATES:
+    Added bandmembers array of objects to database objects
+    Added bandmembers to print when a band is clicked
+    Simplified and added comments to Bands.js and Venues.js
+    Converted dates to strings in Bookings.js' Bookings function in "Weekday, Month Day, Year" format
